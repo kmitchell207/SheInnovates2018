@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
         //creates instance of database
         mFirebaseInstance = FirebaseDatabase.getInstance();
         //get reference to user node
-        mFirebaseDatabase = mFirebaseInstance.getReference("meal-planner-pro-33c1")
+        mFirebaseDatabase = mFirebaseInstance.getReference("meal-planner-pro-33c1");
 
         Button btn = (Button)findViewById(R.id.button3);
 
@@ -120,7 +120,7 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-
+    return true;
 
     }
     protected void nextPage(){
