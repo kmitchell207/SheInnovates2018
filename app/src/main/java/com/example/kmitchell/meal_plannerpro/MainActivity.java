@@ -110,7 +110,7 @@ public class MainActivity extends AppCompatActivity {
                       //  Log.d("Print", dataSnapshot.getValue().toString()  );
                         for(DataSnapshot dataSnapshot2 : dataSnapshot.getChildren() ) {
                             Log.d("Print", dataSnapshot2.getValue().toString() );
-
+                            Log.d("PrintPARENT", dataSnapshot2.getKey().toString()); 
                         }
 
 
