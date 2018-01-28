@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Meal_PlannerPro</string>
+    <string name="Search">Search</string>
+    <string name="Ingredient">Ingredient</string>
+    <string name="Recipe">Recipe</string>
+    <string name="Cost">Cost</string>
+    <string name="IntroRecipe">Recipes that fit your criteria: </string>
+    <string name="shopButton">View Shopping List Now!</string>
+</resources>

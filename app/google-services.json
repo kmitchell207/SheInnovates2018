@@ -1,0 +1,99 @@
+{
+  "project_info": {
+    "project_number": "704726482377",
+    "firebase_url": "https://meal-planner-pro-331c1.firebaseio.com",
+    "project_id": "meal-planner-pro-331c1",
+    "storage_bucket": "meal-planner-pro-331c1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:704726482377:android:492b899fdf9d3c24",
+        "android_client_info": {
+          "package_name": "edu.pitt.cs.cs1635.amp224.meal_planner_pro"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "704726482377-o3egc7h86gej812m55824ergstmnlshh.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "edu.pitt.cs.cs1635.amp224.meal_planner_pro",
+            "certificate_hash": "ce17c9070469c504d1e9cfcec4af25d0048a936a"
+          }
+        },
+        {
+          "client_id": "704726482377-o06o4k4hebtpn8cmmt5h85n7tjfkiktm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBpcehhLgEUEKio8iqboRC9o_43l-7UFe0"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "704726482377-o06o4k4hebtpn8cmmt5h85n7tjfkiktm.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:704726482377:android:73e7f93cd80eae43",
+        "android_client_info": {
+          "package_name": "com.example.kmitchell.meal_plannerpro"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "704726482377-7skav342ig0uv6tjdgmumaobj2fa4jgt.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.kmitchell.meal_plannerpro",
+            "certificate_hash": "f44d017f5dd1c124ef930c256ade0ea51b56d55f"
+          }
+        },
+        {
+          "client_id": "704726482377-o06o4k4hebtpn8cmmt5h85n7tjfkiktm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBpcehhLgEUEKio8iqboRC9o_43l-7UFe0"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "704726482377-o06o4k4hebtpn8cmmt5h85n7tjfkiktm.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
