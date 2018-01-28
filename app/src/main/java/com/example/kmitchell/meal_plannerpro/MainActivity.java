@@ -11,6 +11,9 @@ import android.util.JsonWriter;
 import java.lang.Iterable;
 import java.util.Iterator;
 
+import java.util.ArrayList;
+import java.util.TreeSet;
+
 
 
 
@@ -53,9 +56,7 @@ public class MainActivity extends AppCompatActivity {
         //get reference to user node
         mFirebaseDatabase = mFirebaseInstance.getReference();
 //meal-planner-pro-331c1
-        Button btn = (Button)findViewById(R.id.button3);
-
-
+        Button btn = (Button) findViewById(R.id.button3);
 
 
         btn.setOnClickListener(new View.OnClickListener() {
@@ -65,33 +66,32 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
 
 
-
-                mEdit   = (EditText)findViewById(R.id.editText);
-                mEdit2   = (EditText)findViewById(R.id.editText2);
-                mEdit3   = (EditText)findViewById(R.id.editText3);
+                mEdit = (EditText) findViewById(R.id.editText);
+                mEdit2 = (EditText) findViewById(R.id.editText2);
+                mEdit3 = (EditText) findViewById(R.id.editText3);
 
                 String input1 = mEdit.getText().toString();
                 String input2 = mEdit2.getText().toString();
                 String input3 = mEdit3.getText().toString();
 
                 boolean noneOfThese = false;
-                if ( !(input1.equals("Ingredients") || input1.equals("")) ) {
+                if (!(input1.equals("Ingredients") || input1.equals(""))) {
                     //database shit
                     noneOfThese = true;
                     nextPage();
                 }
-                if ( (!(input2.equals("Recipe") || input2.equals("") ) ) && (noneOfThese ==false) ) {
+                if ((!(input2.equals("Recipe") || input2.equals(""))) && (noneOfThese == false)) {
                     //database shit
                     noneOfThese = true;
                     nextPage();
                 }
-                if ( (!(input3.equals("Cost") || input3.equals(""))  )   && (noneOfThese ==false)   ) {
+                if ((!(input3.equals("Cost") || input3.equals(""))) && (noneOfThese == false)) {
                     //database shit
                     noneOfThese = true;
                     nextPage();
                 }
 
-                if(noneOfThese == false){
+                if (noneOfThese == false) {
                     //print to app. please enter one of the values?
 
                 }
@@ -106,78 +106,72 @@ public class MainActivity extends AppCompatActivity {
                     @Override
 
                     public void onDataChange(DataSnapshot dataSnapshot) {
-                        String i ="0";
-                      //  Log.d("Print", dataSnapshot.getValue().toString()  );
-                        for(DataSnapshot dataSnapshot2 : dataSnapshot.getChildren() ) {
-                            Log.d("Print", dataSnapshot2.getValue().toString() );
-                            Log.d("PrintPARENT", dataSnapshot2.getKey().toString()); 
-                        }
+                        String i = "0";
+                        boolean eStop = false;
+                        TreeSet<String> ingredientList = new TreeSet<String>();
+                        ArrayList<String> theFinalRecipe = new ArrayList<String>();
+                        //  Log.d("Print", dataSnapshot.getValue().toString()  );
+
+                        //recipe
+                        for (DataSnapshot dataSnapshot2 : dataSnapshot.getChildren()) {
+                            String ingred = dataSnapshot2.getKey().toString();
+                            String item = "";
+                            String anotherOne = "";
+                            String thelast = "";
+                            //numbers
+                            for (DataSnapshot dataSnapshot3 : dataSnapshot2.getChildren()) {
+                                item = dataSnapshot3.getValue().toString();
+                                //   item = dataSnapshot3.getChildren().toString();
+                                if (eStop == true) {
+                                    break;
+                                }
+                                //type
+                                for (DataSnapshot dataSnapshot4 : dataSnapshot3.getChildren()) {
+                                    anotherOne = dataSnapshot4.getKey().toString();
+                                    //   item = dataSnapshot3.getChildren().toString();
+
+                                    if (eStop == true) {
+                                        break;
+                                    }
+
+                                    //ingredient
+                                    for (DataSnapshot dataSnapshot5 : dataSnapshot4.getChildren()) {
+                                        thelast = dataSnapshot5.getKey().toString();
+                                        //   item = dataSnapshot3.getChildren().toString();
+                                        ingredientList.add(thelast);
+
+                                        if (eStop == true) {
+                                            break;
+                                        }
+
+                                    }
+                                }
+                            }
 
 
+                            Log.d("Ingreg", ingred);
+                            Log.d("item", item);
+                            Log.d("!!!!!", anotherOne);
+                            Log.d("last", thelast);
+                        }//end for loop
 
-                        /*
-                        Iterator <DataSnapshot> i = dataSnapshot.getChildren().iterator();
-                        Log.d("!!!!!", i.toString());
-                    while(i.hasNext() ){
-                        DataSnapshot curr = i.next();
-                        Log.d("Print", curr.getKey());
-*/
 
-                    }
-
+                    }//end ondata change
 
                     @Override
-                    public void onCancelled(DatabaseError databaseError) {
+                    public void onCancelled(DatabaseError databaseerror){
 
-                    }
-                });
-
-
-
-                //print it
-                //String input = mEdit.getText().toString();
-                //Log.d("print", input);
-
-            }
+                    }//end oncancelled
+                });//and add listener
 
 
-
-        });
-
+            }//on click
 
 
+        });//end setclick listener
+    }//on create
 
 
-    } //end on create
-
-    protected boolean databaseStuff(String key, FirebaseDatabase mfirebaseDatabase){
-
-        //get instance of child. which would be the different recipes
-
-        //this is going to be the comparison part
-
-      //  DataSnapshot firstChild = dataSnapshot.getChildren().iterator().next();
-
-        //Log.d("print", firstChild);
-
-     //   var ref = new Firebase('https://your.firebaseio.com/');
-       // Query query = ref.equalTo(key);
-
-       /* Iterator<?> iterator;
-        while( mfirebaseDatabase.hasChild() ) {
-            for (DataSnapshot child : parent.getChildren()) {
-                Log.d(child);
-            }
-
-            Log.d(parent.getChild() );
-        }
-*/
-
-
-
-    return true;
-
-    }
     protected void nextPage(){
         startActivity(new Intent(MainActivity.this, SecondPage.class));
 
