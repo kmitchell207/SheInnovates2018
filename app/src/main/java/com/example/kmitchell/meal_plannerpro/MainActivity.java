@@ -41,6 +41,16 @@ public class MainActivity extends AppCompatActivity {
     TextView mText;
 
 
+    String input1 ="";
+    String input2 = "";
+    String input3 = "";
+
+    boolean noneOfThese = false;
+    boolean bInput = false;
+    boolean bInput2 = false;
+    boolean bInput3 = false;
+
+
 
     private DatabaseReference mFirebaseDatabase;
     private FirebaseDatabase mFirebaseInstance;
@@ -70,38 +80,34 @@ public class MainActivity extends AppCompatActivity {
                 mEdit2 = (EditText) findViewById(R.id.editText2);
                 mEdit3 = (EditText) findViewById(R.id.editText3);
 
-                String input1 = mEdit.getText().toString();
-                String input2 = mEdit2.getText().toString();
-                String input3 = mEdit3.getText().toString();
+                 input1 = mEdit.getText().toString();
+                 input2 = mEdit2.getText().toString();
+                 input3 = mEdit3.getText().toString();
 
-                boolean noneOfThese = false;
+                 noneOfThese = false;
+                 bInput = false;
+                 bInput2 = false;
+                 bInput3 = false;
+
                 if (!(input1.equals("Ingredients") || input1.equals(""))) {
-                    //database shit
+                    bInput = true;
                     noneOfThese = true;
-                    nextPage();
                 }
                 if ((!(input2.equals("Recipe") || input2.equals(""))) && (noneOfThese == false)) {
-                    //database shit
+                    bInput2 = true;
                     noneOfThese = true;
-                    nextPage();
                 }
                 if ((!(input3.equals("Cost") || input3.equals(""))) && (noneOfThese == false)) {
-                    //database shit
+                    bInput3 = true;
                     noneOfThese = true;
-                    nextPage();
                 }
 
                 if (noneOfThese == false) {
                     //print to app. please enter one of the values?
 
                 }
-/*
-                String stringFromdb = mFirebaseDatabase.getRoot().toString();
-                String string2 = mFirebaseDatabase.getParent().child(stringFromdb).toString();
-                Log.d("Print", stringFromdb);
-                Log.d("Print", string2);
 
-*/
+
                 mFirebaseDatabase.addValueEventListener(new ValueEventListener() {
                     @Override
 
@@ -112,12 +118,17 @@ public class MainActivity extends AppCompatActivity {
                         ArrayList<String> theFinalRecipe = new ArrayList<String>();
                         //  Log.d("Print", dataSnapshot.getValue().toString()  );
 
+
+
+                        //this is going to find the recipes we need
                         //recipe
                         for (DataSnapshot dataSnapshot2 : dataSnapshot.getChildren()) {
                             String ingred = dataSnapshot2.getKey().toString();
                             String item = "";
                             String anotherOne = "";
                             String thelast = "";
+
+
                             //numbers
                             for (DataSnapshot dataSnapshot3 : dataSnapshot2.getChildren()) {
                                 item = dataSnapshot3.getValue().toString();
@@ -138,22 +149,87 @@ public class MainActivity extends AppCompatActivity {
                                     for (DataSnapshot dataSnapshot5 : dataSnapshot4.getChildren()) {
                                         thelast = dataSnapshot5.getKey().toString();
                                         //   item = dataSnapshot3.getChildren().toString();
-                                        ingredientList.add(thelast);
+
+                                        if (bInput) {
+                                            if (input1.toUpperCase().equals(thelast.toUpperCase())) {
+                                                theFinalRecipe.add(ingred.toUpperCase());
+                                            }
+
+                                        }
+                                    }
+                                }
+                            }
+                        }//end first for loop
+
+
+
+                            //this is going to add teh correct ingredients with the recipes we have
+                            //recipes
+                            for (DataSnapshot dataSnapshot12 : dataSnapshot.getChildren()) {
+                                 String ingred = dataSnapshot12.getKey().toString();
+                               String  item = "";
+                                String anotherOne = "";
+                                String thelast = "";
+                                 boolean addIt = false;
+
+                                Iterator iterator = theFinalRecipe.iterator();
+                                while (iterator.hasNext()) {
+                                    if (ingred.toUpperCase().equals(iterator.next())) {
+                                        addIt = true;
+                                        break;
+                                    }
+                                }
+
+
+                                //numbers
+                                for (DataSnapshot dataSnapshot13 : dataSnapshot12.getChildren()) {
+                                    item = dataSnapshot13.getValue().toString();
+                                    //   item = dataSnapshot3.getChildren().toString();
+                                    if (eStop == true) {
+                                        break;
+                                    }
+                                    //type
+                                    for (DataSnapshot dataSnapshot14 : dataSnapshot13.getChildren()) {
+                                        anotherOne = dataSnapshot14.getKey().toString();
+                                        //   item = dataSnapshot3.getChildren().toString();
 
                                         if (eStop == true) {
                                             break;
                                         }
 
+                                        //ingredient
+                                        for (DataSnapshot dataSnapshot15 : dataSnapshot14.getChildren()) {
+                                            thelast = dataSnapshot15.getKey().toString();
+                                            //   item = dataSnapshot3.getChildren().toString();
+
+                                            if(addIt ){
+                                                ingredientList.add(thelast);
+
+
+                                            }
+                                        }
+                                        addIt = false;
                                     }
                                 }
-                            }
 
 
-                            Log.d("Ingreg", ingred);
-                            Log.d("item", item);
-                            Log.d("!!!!!", anotherOne);
-                            Log.d("last", thelast);
+                  //          Log.d("Ingreg", ingred);
+                    //        Log.d("item", item);
+                      //      Log.d("!!!!!", anotherOne);
+                        //    Log.d("last", thelast);
                         }//end for loop
+
+                        Iterator iterator = theFinalRecipe.iterator();
+                        while (iterator.hasNext()) {
+                            Log.d("Recipes", iterator.next().toString() );
+
+                        }
+
+                        Iterator iterator2 = ingredientList.iterator();
+                        while (iterator2.hasNext()) {
+                            Log.d("Ingredients", iterator2.next().toString() );
+
+                        }
 
 
                     }//end ondata change
