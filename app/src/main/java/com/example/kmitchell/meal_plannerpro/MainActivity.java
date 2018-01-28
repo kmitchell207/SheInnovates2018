@@ -231,6 +231,7 @@ public class MainActivity extends AppCompatActivity {
 
                         }
 
+                        nextPage(theFinalRecipe, ingredientList);
 
                     }//end ondata change
 
@@ -248,8 +249,15 @@ public class MainActivity extends AppCompatActivity {
     }//on create
 
 
-    protected void nextPage(){
-        startActivity(new Intent(MainActivity.this, SecondPage.class));
+    protected void nextPage(ArrayList<String> al, TreeSet <String>ts){
+        Intent i =new Intent(MainActivity.this,SecondPage.class);
+        i.putExtra("StringKey",al);
+        i.putExtra("ts",ts);
+
+        startActivity(i);
+
+
+        //startActivity(new Intent(MainActivity.this, SecondPage.class));
 
     }
 
