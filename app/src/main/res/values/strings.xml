@@ -6,4 +6,5 @@
     <string name="Cost">Cost</string>
     <string name="IntroRecipe">Recipes that fit your criteria: </string>
     <string name="shopButton">View Shopping List Now!</string>
+    <string name="shoppingList">Here is your shopping list:</string>
 </resources>
