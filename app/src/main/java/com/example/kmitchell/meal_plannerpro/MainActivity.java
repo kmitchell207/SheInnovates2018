@@ -31,7 +31,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-
+//MainActivity
 public class MainActivity extends AppCompatActivity {
 
     Button mButton;
